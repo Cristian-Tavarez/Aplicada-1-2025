@@ -1,0 +1,12 @@
+﻿@using RegistrodeCobrodePretamo.Layout
+
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(RegistrodeCobrodePretamo.Layout.MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(RegistrodeCobrodePretamo.Layout.MainLayout)">
+            <p>Lo sentimos, la página no fue encontrada.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

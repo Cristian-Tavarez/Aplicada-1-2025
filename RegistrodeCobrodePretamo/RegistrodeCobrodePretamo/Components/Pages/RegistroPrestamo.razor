@@ -1,0 +1,39 @@
+﻿@page "/registro-prestamo"
+@using RegistrodeCobrodePretamo.Models
+@inject HttpClient Http
+
+<h3>Registro de Préstamos</h3>
+
+<EditForm Model="nuevoPrestamo" OnValidSubmit="GuardarPrestamo">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label>Cliente ID</label>
+        <InputNumber @bind-Value="nuevoPrestamo.ClienteId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Monto del Préstamo</label>
+        <InputNumber @bind-Value="nuevoPrestamo.Monto" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Cantidad de Cuotas</label>
+        <InputNumber @bind-Value="nuevoPrestamo.CantidadCuotas" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+</EditForm>
+
+@code {
+    private Prestamo nuevoPrestamo = new Prestamo();
+
+    private async Task GuardarPrestamo()
+    {
+        var response = await Http.PostAsJsonAsync("api/prestamos", nuevoPrestamo);
+        if (response.IsSuccessStatusCode)
+        {
+            nuevoPrestamo = new Prestamo();
+        }
+    }
+}
